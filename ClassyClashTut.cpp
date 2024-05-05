@@ -17,7 +17,7 @@ private:
      Texture2D idle{LoadTexture("characters/knight_idle_spritesheet.png")};
      Texture2D run{LoadTexture("characters/knight_run_spritesheet.png")};
      Vector2 screenPos;
-     Vector2 worldPos;
+     Vector2 worldPos{0.0, 0.0};
      // right = 1
      float rightLeft{1.f};
      // animation
@@ -25,7 +25,7 @@ private:
      int frame{};
      const int maxFrames{6};
      const float updateTime{1.f / 12.f};
-     float speed{100.f};
+     float speed{2.f};
      float knightScale{4.f};
      float dt = GetFrameTime();
 };
@@ -38,6 +38,7 @@ void Character::setScreenPos(int winWidth, int winHeight)
 
 void Character::tick(float deltaTime)
 {
+     speed = 2.f;
      Vector2 direction{};
      if (IsKeyDown(KEY_A))
           direction.x = -1;
@@ -48,7 +49,7 @@ void Character::tick(float deltaTime)
      if (IsKeyDown(KEY_W))
           direction.y = -1;
      if (IsKeyDown(KEY_LEFT_SHIFT))
-          speed = 400 * deltaTime;
+          speed = 4;
      if (Vector2Length(direction) != 0.0)
      {
 
