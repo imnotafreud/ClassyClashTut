@@ -16,9 +16,8 @@ int main()
      Vector2 mapPos{0.0, 0.0};
 
      // create knight
-     Character knight;
-     knight.setScreenPos(screen_width, screen_height);
-
+     Character knight(screen_width, screen_height);
+     //knight.setScreenPos(screen_width, screen_height);
      // main loop
      while (!WindowShouldClose())
      {
