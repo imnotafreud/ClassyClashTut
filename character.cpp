@@ -10,10 +10,10 @@ Character::Character(int winWidth, int winHeight)
                  static_cast<float>(winHeight) / 2.f - knightScale * (0.5 * height)};
 }
 
-
 void Character::tick(float deltaTime)
 {
-    lastWorldPos = getWorldPos();
+    BaseCharacter::tick(deltaTime);
+
     speed = 2.f;
     Vector2 direction{0.f, 0.f};
     if (IsKeyDown(KEY_A))
@@ -38,46 +38,4 @@ void Character::tick(float deltaTime)
         texture = idle;
     }
     // update animation
-    runningTime += deltaTime;
-    if (runningTime >= updateTime)
-    {
-        frame++;
-        runningTime = 0.f;
-        frame = frame % maxFrames;
-    }
-    // draw character
-    Rectangle source{frame * width, 0, rightLeft * width, height};
-    Rectangle dest{screenPos.x, screenPos.y, knightScale * width, knightScale * height};
-    DrawTexturePro(texture, source, dest, Vector2{0, 0}, 0.0, WHITE);
-};
-
-void Character::debug(float deltaTime)
-
-{
-
-    time += deltaTime;
-    if (time >= 1)
-    {
-
-        time = 0.f;
-        std::cout << "X " << worldPos.x;
-        std::cout << " Y " << worldPos.y << std::endl;
-        std::cout << " dT " << deltaTime << std::endl;
-    }
-}
-
-void Character::undoMovement()
-
-{
-    worldPos = lastWorldPos;
-}
-
-Rectangle Character::getCollisionRec()
-{
-    return Rectangle{
-        screenPos.x,
-        screenPos.y,
-        width*knightScale,
-        height*knightScale
-    };
 };
