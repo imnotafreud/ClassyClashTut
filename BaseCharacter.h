@@ -15,6 +15,7 @@ public:
     Rectangle getCollisionRec();
 
     virtual void tick(float deltaTime);
+    virtual Vector2 getScreenPos() = 0;
 
 protected:
     Texture2D texture{LoadTexture("characters/knight_idle_spritesheet.png")};
@@ -37,6 +38,7 @@ protected:
     float knightScale{4.f};
     float dt = GetFrameTime();
     float time{0.f};
+    Vector2 velocity{};
 
 private:
 };
