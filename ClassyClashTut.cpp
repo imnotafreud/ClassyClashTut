@@ -3,6 +3,7 @@
 #include "raymath.h"
 #include "settings.h"
 #include "character.h"
+#include "prop.h"
 
 int main()
 {
@@ -17,7 +18,13 @@ int main()
 
      // create knight
      Character knight(screen_width, screen_height);
-     //knight.setScreenPos(screen_width, screen_height);
+  
+     
+     Prop props[2]{
+          Prop{Vector2{450.f, 550.f}, LoadTexture("nature_tileset/Rock.png")},
+          Prop{Vector2{750.f, 600.f}, LoadTexture("nature_tileset/Log.png")}
+     };
+
      // main loop
      while (!WindowShouldClose())
      {
@@ -38,7 +45,18 @@ int main()
           {
                knight.undoMovement();
           }
+
           knight.debug(dt);
+          //draw props
+          for(auto prop : props)
+          {
+               prop.Render(knight.getWorldPos());
+               if(CheckCollisionRecs(knight.getCollisionRec(), prop.getCollisionRec(knight.getWorldPos())))
+          {
+               knight.undoMovement();
+          }
+          }
+
           EndDrawing();
      }
      UnloadTexture(map);

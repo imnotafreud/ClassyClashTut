@@ -67,6 +67,17 @@ void Character::debug(float deltaTime)
 }
 
 void Character::undoMovement()
+
 {
     worldPos = lastWorldPos;
 }
+
+Rectangle Character::getCollisionRec()
+{
+    return Rectangle{
+        screenPos.x,
+        screenPos.y,
+        width*knightScale,
+        height*knightScale
+    };
+};
